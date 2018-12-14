@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1544812670325.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2678504944",
+    "id" : "282A7241",
+    "lastKnownWriteTime" : 1544812749,
+    "last_content_update" : 1544812749458,
+    "path" : "~/GitHub/Final_Project_Paige_Kyra/MainScript.R",
+    "project_path" : "MainScript.R",
+    "properties" : {
+        "cursorPosition" : "39,59",
+        "scrollLine" : "26"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
