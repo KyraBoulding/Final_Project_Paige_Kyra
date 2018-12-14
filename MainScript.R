@@ -46,3 +46,11 @@ path.g <- paste(work.d,"/",out.put.folders[4], "/", sep="")
 path.t <- paste(work.d,"/",out.put.folders[5], "/", sep="")
 
 # write.csv(x.t,paste(path.t, "test.x.csv"), row.names=FALSE)
+
+
+
+
+
+
+
+
