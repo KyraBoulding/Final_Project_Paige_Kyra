@@ -5,15 +5,15 @@
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "2678504944",
+    "hash" : "1663897339",
     "id" : "282A7241",
-    "lastKnownWriteTime" : 1544812749,
-    "last_content_update" : 1544812749458,
+    "lastKnownWriteTime" : 1544813270,
+    "last_content_update" : 1544813270153,
     "path" : "~/GitHub/Final_Project_Paige_Kyra/MainScript.R",
     "project_path" : "MainScript.R",
     "properties" : {
-        "cursorPosition" : "39,59",
-        "scrollLine" : "26"
+        "cursorPosition" : "17,0",
+        "scrollLine" : "0"
     },
     "relative_order" : 1,
     "source_on_save" : false,
