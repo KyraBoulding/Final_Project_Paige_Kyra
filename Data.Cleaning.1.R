@@ -134,3 +134,5 @@ for(i in 1:length(primary.site.b)){
 #===== Merge all subsets into one data frame ===================================
 
 
+all.prime.sites.weight <- rbind()
+
