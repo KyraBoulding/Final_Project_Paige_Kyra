@@ -65,31 +65,37 @@ ggplot(primary.site.freq, x=primary.site.freq$Var1,
 # first, we only want to look at cancer that have metastisized
 data<- data.frame(data)
 # removing everything that hasnt metasized
-prime.data <- data %>%
+prime.data.a <- data %>%
   filter(Metastasis_status == "YES")
 
 # remove columns with variables we aren't using
 obs.delete <- c( "Cancer_subtype", "Experiment_id", "Pubmed_id", "Dataset_id", "Platform_id", "Standard", "Class_name", "Sample_id","Sample_label")
-prime.data <- prime.data[, ! names(prime.data) %in% obs.delete, drop = F]
+prime.data.b <- prime.data.a[, ! names(prime.data.a) %in% obs.delete, drop = F]
 
 # some of the primary sites are listed with mulitple sites....
 # get rid of rows with multiple metastisis sites for one sample
-prime.data <- prime.data[!grepl(",", prime.data$Metastasis_site),]
+prime.data.c <- prime.data.b[!grepl(",", prime.data.b$Metastasis_site),]
 # remove the unknown catagory
-prime.data <- prime.data[!grepl("unknown", prime.data$Metastasis_site),]
+prime.data.d <- prime.data.c[!grepl("unknown", prime.data.c$Metastasis_site),]
 # remove nay rows with NA values
-prime.data <- na.omit(prime.data)
+prime.data.e <- na.omit(prime.data.d)
 
+# remove spaces from names in columns
+prime.data.f <- as.data.frame(apply(prime.data.e,2,function(x)gsub('\\s+', '_',x)))
 #kidney is spelt wrong... replace it with correct spelling
+prime.data.g <- as.data.frame(apply(prime.data.f,2,function(x)gsub('kindey', 'kidney',x)))
+
 
 # check if remomved all missing values
-sum(is.na(prime.data))
+sum(is.na(prime.data.g))
+head(prime.data.g)
+# rename the final data frame
+prime.data <- prime.data.g
 
-head(prime.data)
-
-prime.data.f <- data.frame(table(prime.data$Metastasis_site))
+#make a frequency table and save as csv
+prime.data.h <- data.frame(table(prime.data$Metastasis_site))
 # write this file as clean data and save
-write.csv(prime.data.f, paste(path.cd, "Freq_of_Metas_Site_All_Primary.csv"),
+write.csv(prime.data.h, paste(path.cd, "Freq_of_Metas_Site_All_Primary.csv"),
           row.names = FALSE)
 
 #==== Subset by Primary Site ===================================================
@@ -101,8 +107,8 @@ write.csv(prime.data.f, paste(path.cd, "Freq_of_Metas_Site_All_Primary.csv"),
 unique(prime.data$Metastasis_site)
 
 #create object with every unique primary site
-primary.site.b<- (unique(prime.data$Primary_site))
 
+primary.site.b<- (unique(prime.data$Primary_site))
 # create for loop to do this for every primary site
 for(i in 1:length(primary.site.b)){
   n<- prime.data %>%
@@ -125,4 +131,6 @@ for(i in 1:length(primary.site.b)){
    
 }
 
-#=====
+#===== Merge all subsets into one data frame ===================================
+
+
