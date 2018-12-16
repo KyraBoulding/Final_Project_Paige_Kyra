@@ -1,13 +1,35 @@
 "","Matastatic_Site","Freq","Weight"
-"1","bone",18,0.0235602094240838
-"2","brain",174,0.227748691099476
-"3","lung",36,0.0471204188481675
-"4","lymph node",280,0.366492146596859
-"5","other",4,0.00523560209424084
-"6","skin",53,0.0693717277486911
-"7","small intestine",24,0.031413612565445
-"8","soft tissue",66,0.0863874345549738
-"9","spleen",24,0.031413612565445
-"10","subcutaneous",71,0.0929319371727749
-"11","subcutanious soft tissue",4,0.00523560209424084
-"12","viscera",10,0.0130890052356021
+"1","adrenal_gland",0,0
+"2","bone",18,0.0235602094240838
+"3","brain",174,0.227748691099476
+"4","breast",0,0
+"5","caudaequina",0,0
+"6","chest_wall",0,0
+"7","colorectum",0,0
+"8","fat",0,0
+"9","head_&_neck",0,0
+"10","kidney",0,0
+"11","liver",0,0
+"12","lung",36,0.0471204188481675
+"13","lymph_node",280,0.366492146596859
+"14","muscle",0,0
+"15","non-regional_/_distant_lymph_nodes",0,0
+"16","omentum",0,0
+"17","other",4,0.00523560209424084
+"18","ovary",0,0
+"19","pancreas",0,0
+"20","pelvis",0,0
+"21","peritoneal_surfaces",0,0
+"22","peritoneum",0,0
+"23","pleura",0,0
+"24","pleura/pleural_effusion",0,0
+"25","posterior_peritoneum",0,0
+"26","skeleton",0,0
+"27","skin",53,0.0693717277486911
+"28","small_intestine",24,0.031413612565445
+"29","soft_tissue",66,0.0863874345549738
+"30","spinal_cord",0,0
+"31","spleen",24,0.031413612565445
+"32","subcutaneous",71,0.0929319371727749
+"33","subcutanious_soft_tissue",4,0.00523560209424084
+"34","viscera",10,0.0130890052356021
