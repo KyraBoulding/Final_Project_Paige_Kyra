@@ -111,6 +111,7 @@ unique(prime.data$Metastasis_site)
 primary.site.b<- (unique(prime.data$Primary_site))
 # create for loop to do this for every primary site
 for(i in 1:length(primary.site.b)){
+  
   n<- prime.data %>%
     filter(Primary_site == primary.site.b[i])  #filter by desired metastatic
   # site, assign to temporary object
@@ -120,6 +121,9 @@ for(i in 1:length(primary.site.b)){
   m$Weight <- (m$Freq)/(sum(m$Freq)) #create weight column
   
   colnames(m)[1] <- "Matastatic_Site"  # rename weight column
+ 
+  #create column with the primary site (needed for later merging) 
+  m$Primary_site <- rep(primary.site.b[i], length(m$Weight))
   
   # write this as a clean data file 
   v <- paste (primary.site.b[i] ,"Freq_Weight_Mas_Site.csv", sep="_")
@@ -130,6 +134,8 @@ for(i in 1:length(primary.site.b)){
  assign(paste(primary.site.b[i], ".data", sep = ""), n)
    
 }
+
+
 
 #===== Merge all subsets into one data frame ===================================
 
