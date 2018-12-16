@@ -3,15 +3,18 @@
 #                        Data Cleaning 1                                       #
 
 ################################################################################
+install.packages("tidyverse")
 
+library(tidyverse)
+library(readxl)
+library(ggplot2)
+library(dplyr)
 
 getwd()
 setwd("1.Raw.Data")
 data <- read_xlsx("dataset_information.xlsx")
 setwd("~/GitHub/Final_Project_Paige_Kyra")
 
-library(ggplot2)
-library(dplyr)
 #===================== Visualize Data ==========================================
 
 #---- Metastic Sites -----------------------------------------------------------
@@ -60,7 +63,7 @@ ggplot(primary.site.freq, x=primary.site.freq$Var1,
 #===== Initial Cleaning ========================================================
 
 # first, we only want to look at cancer that have metastisized
-
+data<- data.frame(data)
 # removing everything that hasnt metasized
 prime.data <- data %>%
   filter(Metastasis_status == "YES")
@@ -76,6 +79,8 @@ prime.data <- prime.data[!grepl(",", prime.data$Metastasis_site),]
 prime.data <- prime.data[!grepl("unknown", prime.data$Metastasis_site),]
 # remove nay rows with NA values
 prime.data <- na.omit(prime.data)
+
+#kidney is spelt wrong... replace it with correct spelling
 
 # check if remomved all missing values
 sum(is.na(prime.data))
@@ -99,7 +104,7 @@ unique(prime.data$Metastasis_site)
 primary.site.b<- (unique(prime.data$Primary_site))
 
 # create for loop to do this for every primary site
-for(i in 1:2){
+for(i in 1:length(primary.site.b)){
   n<- prime.data %>%
     filter(Primary_site == primary.site.b[i])  #filter by desired metastatic
   # site, assign to temporary object
@@ -120,5 +125,4 @@ for(i in 1:2){
    
 }
 
-
-#
+#=====
