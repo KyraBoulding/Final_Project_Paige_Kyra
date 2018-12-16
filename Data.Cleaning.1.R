@@ -107,11 +107,12 @@ write.csv(prime.data.h, paste(path.cd, "Freq_of_Metas_Site_All_Primary.csv"),
 unique(prime.data$Metastasis_site)
 
 #create object with every unique primary site
-
 primary.site.b<- (unique(prime.data$Primary_site))
+
+
 # create for loop to do this for every primary site
 for(i in 1:length(primary.site.b)){
-  
+  #i=1
   n<- prime.data %>%
     filter(Primary_site == primary.site.b[i])  #filter by desired metastatic
   # site, assign to temporary object
@@ -125,6 +126,8 @@ for(i in 1:length(primary.site.b)){
   #create column with the primary site (needed for later merging) 
   m$Primary_site <- rep(primary.site.b[i], length(m$Weight))
   
+  #remove rows with zero frequencies
+  m<- m[m$Freq!=0,]
   # write this as a clean data file 
   v <- paste (primary.site.b[i] ,"Freq_Weight_Mas_Site.csv", sep="_")
   write.csv(m, paste(path.cd,v[1]))
@@ -132,7 +135,6 @@ for(i in 1:length(primary.site.b)){
 # rename temporary objects so the data frames can be called on later   
   assign(paste(primary.site.b[i], ".freq", sep=""), m) 
  assign(paste(primary.site.b[i], ".data", sep = ""), n)
-   
 }
 
 
@@ -140,5 +142,19 @@ for(i in 1:length(primary.site.b)){
 #===== Merge all subsets into one data frame ===================================
 
 
-all.prime.sites.weight <- rbind()
+# merge all the frequency/weight data sets to get one master set
+all.prime.sites.weight <- rbind(breast.freq, colorectum.freq, skin.freq,
+                                lung.freq, pancreas.freq, kidney.freq, 
+                                oral_cavity.freq, tongue.freq, mandible.freq,
+                                FOM.freq, prostate.freq, midgut.freq, liver.freq,
+                                ovary.freq, nasopharynx.freq, femur.freq, 
+                                humerus.freq, fibula.freq, tibia.freq, costa.freq,
+                                pelvis.freq, stomach.freq, testis.freq, thyroid.freq,
+                                brain.freq, small_intestine.freq, cervix.freq,
+                                penis.freq, adrenal_gland.freq, bladder.freq,
+                                esophagus.freq, thymus.freq, uterus.freq, eye.freq)
+
+# write as csv
+write.csv(all.prime.sites.weight, paste(path.cd, "All_Freq_weight_data.csv"))
+
 
