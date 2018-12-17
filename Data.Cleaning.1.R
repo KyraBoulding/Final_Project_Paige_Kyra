@@ -128,6 +128,7 @@ for(i in 1:length(primary.site.b)){
   
   #remove rows with zero frequencies
   m<- m[m$Freq!=0,]
+  
   # write this as a clean data file 
   v <- paste (primary.site.b[i] ,"Freq_Weight_Mas_Site.csv", sep="_")
   write.csv(m, paste(path.cd,v[1]))
@@ -157,4 +158,29 @@ all.prime.sites.weight <- rbind(breast.freq, colorectum.freq, skin.freq,
 # write as csv
 write.csv(all.prime.sites.weight, paste(path.cd, "All_Freq_weight_data.csv"))
 
+#====== Data Frame for Bar Plot ================================================
 
+# for this we want the weight of primary site = metastatic site vs. the weight
+# of primary site does not = metastic site, for every primary site.
+
+
+for(i in 1:length(primary.site.b)){
+  i=1
+  x<- prime.data %>%
+    filter(Primary_site == primary.site.b[i])  #filter by desired metastatic
+  # site, assign to temporary object
+  y <- x%>%
+    filter()
+  
+  
+  m <- data.frame(table(n$Metastasis_site))  # create frequency table of filtered
+  # subset of data, assign to a temporary object 
+  m$Weight <- (m$Freq)/(sum(m$Freq)) #create weight column
+  
+  colnames(m)[1] <- "Matastatic_Site"  # rename weight column
+  
+  #create column with the primary site (needed for later merging) 
+  m$Primary_site <- rep(primary.site.b[i], length(m$Weight))
+  
+  
+}
