@@ -10,10 +10,17 @@ heat.map.weight <- ggplot(all.prime.sites.weight, aes(Primary_site, Matastatic_S
   theme(panel.grid.major = element_blank(), 
         panel.grid.minor = element_blank(), 
         panel.background = element_blank(),axis.line = element_line(colour = "black")) +
-  theme(axis.text.x = element_text(size =8, angle=45))
+  theme(axis.text.x = element_text(size =8, angle=45, vjust = 0.5))
+
+# write as a pdf
+
+pdf(paste(path.g, "HeatMap_AllPrimary.pdf"))
+plot(heat.map.weight)
+dev.off()
 
 
 
+#########
 install.packages("igraph")
 install.packages("networkD3")
 library(igraph)
@@ -42,8 +49,24 @@ coords <- layout_as_bipartite(g)
 
 
 ######
+install.packages("sna")
+install.packages("network")
+library(sna)
+library(network)
 
-g <- graph.data.frame(data.for.graph, directed = FALSE)
+relNet<-network(all.prime.sites.weight,ignore.eval = FALSE,names.eval='Weight',matrix.type='edgelist',directed=FALSE)
+warnings()
+
+# valued construct adjacency matrix
+adjMat<-as.matrix(relNet,attrname='Weight')
+# convert from distances to similarities
+adjMat[adjMat!=0]<-4-adjMat[adjMat!=0]
+# construct an appropriate geodesic distance matrix from the similarities
+distMat<-geodist(adjMat,ignore.eval=FALSE,inf.replace = sqrt(network.size(relNet)))$gdist
+# compute coords using distance matrix and kk algorithm
+coords<-network.layout.kamadakawai(relNet,layout.par=list(elen=distMat))
+# plot using precomputed coords
+plot(relNet,displaylabels=TRUE,coord=coords,edge.label='Weight',edge.lwd='Weight')
 
 
 
