@@ -178,8 +178,8 @@ number.paired <- count(filter(prime.data,Primary_site == Metastasis_site))
 
 # we then determine the percentage of tumors that metastasize to the same place
 # as the primary tumor by dividing the number paired by the total number of samples
-per.same.loc <- (number.paired)/ (nrow(prime.data))
-
+n <- (number.paired)/ (nrow(prime.data))
+overall.prob <- n[1,1]
 
 #---- Do above for each subset of primary tumor --------------------------------
 
@@ -189,8 +189,8 @@ paired.data.t <- filter(prime.data,Primary_site == "breast" & Metastasis_site== 
 # metastasis site for each subset of primary site
 
 paired.prob.subset <- data.frame(matrix(ncol = 7, nrow = length(primary.site.b)))
-k <- c("total_samples", "probability", "ob_same", "P-value",
-       "P-value2", "CI_lower", "CI_upper")
+k <- c("primary_site", "total_samples", "probability", "ob_same", "P-value",
+      "CI_lower", "CI_upper")
 colnames(paired.prob.subset) <- k
 
 
@@ -206,11 +206,14 @@ for(i in 1:(length(primary.site.b))) {
   z <- (w)/ (nrow(y)) #devided paired by the total samples with specified primary
   # site
 #put number of samples per primary site and probability into dataframe
-  paired.prob.subset[i,1] <- nrow(y) 
-  paired.prob.subset[i,2] <- z
-  paired.prob.subset[i,3] <- w
+  paired.prob.subset[i,2] <- nrow(y) 
+  paired.prob.subset[i,3] <- z
+  paired.prob.subset[i,4] <- w
+  paired.prob.subset[i,1] <- paste(primary.site.b[i])
 
 
 }
 
 write.csv( paired.prob.subset, paste(path.cd, "Probability_Same_Sites_subset.csv"))
+
+
