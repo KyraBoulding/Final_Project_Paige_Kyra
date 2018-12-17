@@ -160,27 +160,57 @@ write.csv(all.prime.sites.weight, paste(path.cd, "All_Freq_weight_data.csv"))
 
 #====== Data Frame for Bar Plot ================================================
 
-# for this we want the weight of primary site = metastatic site vs. the weight
-# of primary site does not = metastic site, for every primary site.
+# The data frame to determine the liklihood of metastastis occuring in the same
+# location as the primary tumor
+
+summary(prime.data)
+library(dplyr)
+
+# set the two columns in question to characters instead of factors
+prime.data$Primary_site <- as.character(prime.data$Primary_site)
+prime.data$Metastasis_site <- as.character(prime.data$Metastasis_site)
+str(prime.data)
+# find all the samples for which the primary site = the metastasis site
+paired.data <- filter(prime.data,Primary_site == Metastasis_site)
+
+# find number of instances for which this is true
+number.paired <- count(filter(prime.data,Primary_site == Metastasis_site))
+
+# we then determine the percentage of tumors that metastasize to the same place
+# as the primary tumor by dividing the number paired by the total number of samples
+per.same.loc <- (number.paired)/ (nrow(prime.data))
 
 
-for(i in 1:length(primary.site.b)){
-  i=1
-  x<- prime.data %>%
-    filter(Primary_site == primary.site.b[i])  #filter by desired metastatic
-  # site, assign to temporary object
-  y <- x%>%
-    filter()
-  
-  
-  m <- data.frame(table(n$Metastasis_site))  # create frequency table of filtered
-  # subset of data, assign to a temporary object 
-  m$Weight <- (m$Freq)/(sum(m$Freq)) #create weight column
-  
-  colnames(m)[1] <- "Matastatic_Site"  # rename weight column
-  
-  #create column with the primary site (needed for later merging) 
-  m$Primary_site <- rep(primary.site.b[i], length(m$Weight))
-  
-  
+#---- Do above for each subset of primary tumor --------------------------------
+
+paired.data.t <- filter(prime.data,Primary_site == "breast" & Metastasis_site== "breast")
+ 
+# make an empty dataframe to put the probability values of primary site = 
+# metastasis site for each subset of primary site
+
+paired.prob.subset <- data.frame(matrix(ncol = 7, nrow = length(primary.site.b)))
+k <- c("total_samples", "probability", "ob_same", "P-value",
+       "P-value2", "CI_lower", "CI_upper")
+colnames(paired.prob.subset) <- k
+
+
+# create a for loop that looks at the likelihood of metastasis in the same site 
+# for each primary site. The goal will be to compare this to the overall 
+# liklihood to determine if some types of cancer have a higher cancer of 
+# metastis in the smae location than others.
+
+for(i in 1:(length(primary.site.b))) {
+
+  y<- filter(prime.data, Primary_site == primary.site.b[i]) #filter by primary 
+  w <-  count(filter(y, Metastasis_site== primary.site.b[i])) #count paired
+  z <- (w)/ (nrow(y)) #devided paired by the total samples with specified primary
+  # site
+#put number of samples per primary site and probability into dataframe
+  paired.prob.subset[i,1] <- nrow(y) 
+  paired.prob.subset[i,2] <- z
+  paired.prob.subset[i,3] <- w
+
+
 }
+
+write.csv( paired.prob.subset, paste(path.cd, "Probability_Same_Sites_subset.csv"))
