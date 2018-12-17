@@ -18,40 +18,83 @@ pdf(paste(path.g, "HeatMap_AllPrimary.pdf"))
 plot(heat.map.weight)
 dev.off()
 
-#---- Chi-Squared for Primary Site = Metastasis Site ---------------------------
+#---- Binomial Test ---------------------------
 # The goal of this section is to determine if certain primary tumor have greater
 # of lesser chance of metastasis in the same site than normal. We determined the
 # "normal" probability as the probability within the entire dataset.
 
-# For loop running a binomail test on our observered frequencies of
-# primary site = metastasis site within each primary type of cancer. Gives prob
-# of the exact number of observations occuring
 
-for(i in 1:nrow(paired.prob.subset)){
+# subset data into two tables: one where probabilities found are greater than the
+# overall.prob for all primary sites and one where the prob is lower that the
+# overall.prob
+str(overall.prob)
+
+# filtering by probability > overall.prob
+higher.prob <- paired.prob.subset%>%
+  filter(probability > overall.prob)
+
+# filter by all values less than overall.prob
+lower.prob <- paired.prob.subset%>%
+  filter(probability < overall.prob)
+
+# Run for loop on the higher.prob data. This for loop will run an upper tailed 
+# binomial test in order to determine if the probability of metastasis in the
+# primary tumor site is significantly greater in these specific cancer type than
+# in the predetermined average (overall.prob)
+
+
+for(i in 1:nrow(higher.prob)){
+
+  l<- binom.test(higher.prob[i,4], higher.prob[i,2], overall.prob, alternative = "greater" )
   
-  l<- dbinom(paired.prob.subset[i,3], paired.prob.subset[i,1], prob = 0.039)
-  paired.prob.subset[i,4] <- l #fill column in the table established in 
+  
+  higher.prob[i,5] <- l$p.value #fill column in the table established in 
   # Data.Cleaning.1 Script
-  
-  }
-
-
-
-for(i in 1:nrow(paired.prob.subset)){
-
-  l<- binom.test(paired.prob.subset[i,3], paired.prob.subset[i,1], 0.039, alternative = "greater" )
-  
-  
-  paired.prob.subset[i,5] <- l$p.value #fill column in the table established in 
-  # Data.Cleaning.1 Script
-  paired.prob.subset[i,6] <- (l$conf.int[1])
-  paired.prob.subset[i,7] <- l$conf.int[2]
+  higher.prob[i,6] <- l$conf.int[1]
+  higher.prob[i,7] <- l$conf.int[2]
   
 }
+write.csv(higher.prob, paste(path.a, "Higher_Same_Site_Prob.csv"))
 
-l
+table.a <- qplot(1:150, 1:150, geom = "blank") + theme_bw() + theme(line = element_blank(), text = element_blank()) +
+  # Then I add my table :
+  annotation_custom(grob = tableGrob(higher.prob))
+
+#save as a pdf to the Table folder
+pdf(paste(path.t, "Table_Higher_Prob.pdf"))
+plot(table.a)
+dev.off()
+
+# Now we will do the same with the lower.prob data set, except we will run a 
+# lower tailed binomial test to determine if any of the cancer primary sites
+# have significantly decreased probabilities of metastasis occuring in the same
+# site.
+
+for(i in 1:nrow(lower.prob)){
+  
+  l<- binom.test(lower.prob[i,4], lower.prob[i,2], overall.prob, alternative = "less" )
+  
+  
+  lower.prob[i,5] <- l$p.value #fill column in the table established in 
+  # Data.Cleaning.1 Script
+  lower.prob[i,6] <- l$conf.int[1]
+  lower.prob[i,7] <- l$conf.int[2]
+  
+}
+write.csv(lower.prob, paste(path.a, "Lower_Same_Site_Prob.csv"))
+
+library(gridExtra)
 
 
+
+tt1 <- ttheme_default()
+grid.arrange(tableGrob(lower.prob[1:30, 1:7], theme=tt1))
+
+
+# save as a pdf
+pdf(paste(path.t, "Table_Lower_Porbability.pdf"))
+plot(table)
+dev.off()
 
 
 #########
