@@ -18,7 +18,39 @@ pdf(paste(path.g, "HeatMap_AllPrimary.pdf"))
 plot(heat.map.weight)
 dev.off()
 
-#---- ANOVA --------------------------------------------------------------------
+#---- Chi-Squared for Primary Site = Metastasis Site ---------------------------
+# The goal of this section is to determine if certain primary tumor have greater
+# of lesser chance of metastasis in the same site than normal. We determined the
+# "normal" probability as the probability within the entire dataset.
+
+# For loop running a binomail test on our observered frequencies of
+# primary site = metastasis site within each primary type of cancer. Gives prob
+# of the exact number of observations occuring
+
+for(i in 1:nrow(paired.prob.subset)){
+  
+  l<- dbinom(paired.prob.subset[i,3], paired.prob.subset[i,1], prob = 0.039)
+  paired.prob.subset[i,4] <- l #fill column in the table established in 
+  # Data.Cleaning.1 Script
+  
+  }
+
+
+
+for(i in 1:nrow(paired.prob.subset)){
+
+  l<- binom.test(paired.prob.subset[i,3], paired.prob.subset[i,1], 0.039, alternative = "greater" )
+  
+  
+  paired.prob.subset[i,5] <- l$p.value #fill column in the table established in 
+  # Data.Cleaning.1 Script
+  paired.prob.subset[i,6] <- (l$conf.int[1])
+  paired.prob.subset[i,7] <- l$conf.int[2]
+  
+}
+
+l
+
 
 
 
