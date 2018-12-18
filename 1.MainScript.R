@@ -75,7 +75,8 @@ install.packages("ggplot2")
 install.packages("readxl")
 install.packages("dplyr")
 install.packages("reshape2")
-install.packages(c("FactoMineR", "factoextra"))
+install.packages("FactoMineR")
+install.packages ("factoextra")
 
 
 #=============================== LIBRARIES =====================================
@@ -89,11 +90,14 @@ library(gridExtra)
 library(igraph)
 library(networkD3)
 library(reshape2)
-library(FactoMineR, factoextra)
+library(FactoMineR)
+library(factoextra)
 
 #=============================== DATA DOWNLOAD =================================
 
 # The file of the raw data can be accessed with the following code.
+# The raw data file was originally taken from:
+#   http://hcmdb.i-sanger.com/download
 
 getwd()  #should be set to the main "Final_Project_Paige_Kyra" folder by default
 setwd("1.Raw.Data")  # for some reason this is the only way it lets us get it...
