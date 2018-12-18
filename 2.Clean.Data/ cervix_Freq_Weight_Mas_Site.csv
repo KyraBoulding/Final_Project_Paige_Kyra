@@ -1,4 +1,4 @@
-"","Matastatic_Site","Freq","Weight","Primary_site"
+"","Metastatic_Site","Freq","Weight","Primary_site"
 "9","head_&_neck",6,0.130434782608696,"cervix"
 "12","lung",6,0.130434782608696,"cervix"
 "13","lymph_node",19,0.41304347826087,"cervix"
