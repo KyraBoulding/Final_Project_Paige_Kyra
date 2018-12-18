@@ -121,7 +121,8 @@ breast.factor$Class_id <- factor(breast.factor$Class_id)
 
 # now i can perform the mca analysis on the transformed breast data. 
 breast.mca <- MCA(breast.factor, graph = TRUE, ncp = 2)
-
+                                          # *side note, this runs for Paige but
+                                          # Kyra's computer doesn't like it...*
 # now I can view each eigen values
 eig.val <- get_eigenvalue(breast.mca)
 
