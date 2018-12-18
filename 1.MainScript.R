@@ -10,10 +10,10 @@
 #   data sets required to run this analysis.
 #   The scripts in this repo should be run in the following order:
 #
-#           - Main Script
-#           - Data.Cleaning.1
-#           - Analysis.Network
-#           - Analysis.MCA
+#           - 1.MainScript
+#           - 2.Data.Cleaning.1
+#           - 3.Analysis.Network
+#           - 4.Analysis.MCA
 #
 #   All Scripts are located outside of the folders in the main working 
 #   directory of the repo. The folders contained in this work-flow are as 
@@ -75,7 +75,6 @@ getwd()  #should be set to the main "Final_Project_Paige_Kyra" folder by default
 setwd("1.Raw.Data")  # for some reason this is the only way it lets us get it...
 data <- read_xlsx("dataset_information.xlsx")
 setwd("~/GitHub/Final_Project_Paige_Kyra") #change the directory back to original
-
 
 #============================== VARIABLES ======================================
 
