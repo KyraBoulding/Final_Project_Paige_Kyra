@@ -4,6 +4,18 @@
 
 ################################################################################
 
+#*******************************************************************************
+# TABLE OF CONTENTS
+#
+#   - Overview
+#   - Packages
+#   - Libraires
+#   - Data Download
+#   - Varibales
+#   - Workflow
+#       - Pathways
+#
+#*******************************************************************************
 ################################################################################
 #
 #   This Script contains the work-flow set up, Libraries, Packages and the 
@@ -11,9 +23,21 @@
 #   The scripts in this repo should be run in the following order:
 #
 #           - 1.MainScript
+#                 (Housekeeping script, with overveiw of workflow and layout
+#                   of project)
+#
 #           - 2.Data.Cleaning.1
+#                 (Primary cleaning.filtering of data and creation of data
+#                   frames for the analysis)
+#
 #           - 3.Analysis.Network
+#                 (Visualization of weighted connections between primary and
+#                   metastasis site, Binomial test on probability of 
+#                   metastasis in primary site, visualization of network)
+#
 #           - 4.Analysis.MCA
+#                 (MCA on currated test data set, MCA on subsets of our data
+#                   as well as on our full data set.)
 #
 #   All Scripts are located outside of the folders in the main working 
 #   directory of the repo. The folders contained in this work-flow are as 
