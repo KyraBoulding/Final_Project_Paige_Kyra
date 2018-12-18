@@ -1,4 +1,4 @@
-"","Matastatic_Site","Freq","Weight","Primary_site"
+"","Metastatic_Site","Freq","Weight","Primary_site"
 "1","adrenal_gland",5,0.00242954324586978,"breast"
 "2","bone",104,0.0505344995140913,"breast"
 "3","brain",296,0.143828960155491,"breast"
