@@ -189,7 +189,7 @@ paired.data.t <- filter(prime.data,Primary_site == "breast" & Metastasis_site== 
 # metastasis site for each subset of primary site
 
 paired.prob.subset <- data.frame(matrix(ncol = 7, nrow = length(primary.site.b)))
-k <- c("primary_site", "total_samples", "probability", "ob_same", "P-value",
+k <- c("primary_site", "total_samples", "probability", "ob_same", "P_value",
       "CI_lower", "CI_upper")
 colnames(paired.prob.subset) <- k
 
@@ -197,7 +197,7 @@ colnames(paired.prob.subset) <- k
 # create a for loop that looks at the likelihood of metastasis in the same site 
 # for each primary site. The goal will be to compare this to the overall 
 # liklihood to determine if some types of cancer have a higher cancer of 
-# metastis in the smae location than others.
+# metastis in the same location than others.
 
 for(i in 1:(length(primary.site.b))) {
 
