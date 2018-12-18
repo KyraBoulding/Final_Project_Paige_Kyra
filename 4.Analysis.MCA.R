@@ -4,6 +4,18 @@
 #                                                                              #
 ################################################################################
 
+#*******************************************************************************
+# TABLE OF CONTENTS
+#
+#   - Overview
+#   - MCA Analysis
+#       - Test Set MCA
+#       - Applying to Our Data
+#           - Breast MCA
+#           - MCA Subset of Thyroid and Bladder Primary Cancers
+#           - Prime Data MCA
+#
+#*******************************************************************************
 ################################################################################
 #
 #     This script contians our attempt at MCA Analysis which is the
