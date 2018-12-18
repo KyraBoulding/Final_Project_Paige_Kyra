@@ -97,12 +97,19 @@ library(factoextra)
 
 # The file of the raw data can be accessed with the following code.
 # The raw data file was originally taken from:
-#   http://hcmdb.i-sanger.com/download
+#   http://hcmdb.i-sanger.com/download    (1.Datasets included in the database)
+# It was downloaded as an excel sheet 
+
 
 getwd()  #should be set to the main "Final_Project_Paige_Kyra" folder by default
 setwd("1.Raw.Data")  # for some reason this is the only way it lets us get it...
 data <- read_xlsx("dataset_information.xlsx")
 setwd("~/GitHub/Final_Project_Paige_Kyra") #change the directory back to original
+
+# *** NOTE ***
+#       This randomly does not retreive the entire raw data (all 14 varaibles) 
+#       if this occurs manually import the "data_information.xlsx" file, it is 
+#       located within the 1.Raw.Data folder. 
 
 #============================== VARIABLES ======================================
 
