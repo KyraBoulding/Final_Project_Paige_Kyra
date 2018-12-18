@@ -1,4 +1,4 @@
-"","Matastatic_Site","Freq","Weight","Primary_site"
+"","Metastatic_Site","Freq","Weight","Primary_site"
 "3","brain",2,0.00140252454417952,"colorectum"
 "7","colorectum",3,0.00210378681626928,"colorectum"
 "11","liver",1001,0.701963534361851,"colorectum"
