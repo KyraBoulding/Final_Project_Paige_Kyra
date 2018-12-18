@@ -4,6 +4,20 @@
 #                                                                              #
 ################################################################################
 
+#*******************************************************************************
+# TABLE OF CONTENTS
+#
+#   - Overview
+#   - Visulaize Data
+#       - Structure
+#       - Metastic Sites
+#       - Primary Sites
+#   - Cleaning Data Set
+#       - Subset by Primary Site
+#       - Data Frame for Metastasis_site = Primary_site Analysis
+#       - Repeat Above for Each Primary Site
+#
+#*******************************************************************************
 ################################################################################
 #
 #     This script contains all of the code used to sort and clean the raw
