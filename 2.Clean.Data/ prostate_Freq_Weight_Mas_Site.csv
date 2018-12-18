@@ -1,4 +1,4 @@
-"","Matastatic_Site","Freq","Weight","Primary_site"
+"","Metastatic_Site","Freq","Weight","Primary_site"
 "1","adrenal_gland",36,0.0268456375838926,"prostate"
 "2","bone",216,0.161073825503356,"prostate"
 "10","kidney",14,0.0104399701715138,"prostate"
