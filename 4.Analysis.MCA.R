@@ -41,6 +41,11 @@
 
 #----------------- Test Set MCA ------------------------------------------------
 
+#**** NOTE ****
+# This script sometimes has issues with variable "test.mca" (line 88), if you go
+# back and run this line indavidually it seems to solve the problem
+
+
 # CREATE a sample data frame. 
 primary <- c((rep("kidney", 4)), (rep("breast", 5)), rep("colon", 2))
 secondary <- c(rep("liver", 3), (rep("lung", 3)), (rep("rectum", 5)))
@@ -79,6 +84,7 @@ str(test.data.factor)
 #it as graph = TRUE
 # in order to simplify the analysis i have specified ncp = 2 which will then only
 # look at my data in two dimensions
+
 test.mca <- MCA(test.data.factor, graph = TRUE, ncp = 2)
 
 # i can plot the percent of variance explained by each dimention
@@ -174,9 +180,10 @@ str(sub.factor)
 sub.factor$Class_id <- factor(sub.factor$Class_id)
 
 # now i can perfrom the MCA anaylsis
-sub.mca <- MCA(sub.factor, graph = TRUE, ncp = 2)
-# the graph show none of the colums being related
-#now i can loook at the percent of variance explained by each dimenion
+sub.mca <- MCA(sub.factor, graph = TRUE, ncp = 2) # *** Kyra's computer had 
+# the graph show none of the colums being related.  *** issues with this we
+#now i can loook at the percent of variance,        *** couldn't figure out
+#explained by each dimenion.                        *** how to fix it.
 
 fviz_screeplot(sub.mca, addlabels = TRUE, ylim = c(0, 45))
 # the first dimension shows that it explains 32.9% of variance
