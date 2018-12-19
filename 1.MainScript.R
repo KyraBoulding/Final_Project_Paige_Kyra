@@ -100,11 +100,10 @@ library(factoextra)
 #   http://hcmdb.i-sanger.com/download    (1.Datasets included in the database)
 # It was downloaded as an excel sheet 
 
+work.d <- getwd()#should be set to the main "Final_Project_Paige_Kyra" folder by default
 
-getwd()  #should be set to the main "Final_Project_Paige_Kyra" folder by default
-setwd("1.Raw.Data")  # for some reason this is the only way it lets us get it...
-data <- read_xlsx("dataset_information.xlsx")
-setwd("~/GitHub/Final_Project_Paige_Kyra") #change the directory back to original
+data <- read_xlsx("1.Raw.Data/dataset_information.xlsx")
+
 
 # *** NOTE ***
 #       This randomly does not retreive the entire raw data (all 14 varaibles) 
@@ -120,7 +119,7 @@ Alpha.val <- 0.05
 
 
 #============================ WORK FLOW SET UP =================================
-work.d <- getwd()
+
 
 out.put.folders <- c("1.Raw.Data","2.Clean.Data", "3.Analysis", "4.Graphs", 
                      "4.Graphs/Table")
