@@ -121,7 +121,7 @@ table.c<- grid.table(subset.pval.prob[1:9, 1:6], theme = ttheme_default())
 # a way to save the table. As a result a screen shot version of the table has 
 # been included in the Table folder of this repo.
 pdf(paste(path.t, "Significant_Probs.pdf"))
-plot(table.c)
+grid.table(table.c)
 dev.off()
 
 
