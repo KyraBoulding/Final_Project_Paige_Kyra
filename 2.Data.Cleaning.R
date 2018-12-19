@@ -59,7 +59,7 @@ summary(data)
 # unique metastastic sites are recorded within the data.
 
 metastasis.site.freq <- data.frame(table(data$Metastasis_site))
-
+print(metastasis.site.freq)
 # visualize frequency of metastic sites
 ggplot(metastasis.site.freq, x=metastasis.site.freq$Var1, 
        y= metastasis.site.freq$Freq)+ 
@@ -85,7 +85,7 @@ ggplot(metastasis.site.freq, x=metastasis.site.freq$Var1,
 
 # identifying number and frequency of primary sites
 primary.site.freq <- data.frame(table(data$Primary_site))
-
+print(primary.site.freq)
 # visualize the frequency of primary sites.
 ggplot(primary.site.freq, x=primary.site.freq$Var1, 
        y= primary.site.freq$Freq)+ 
@@ -165,14 +165,14 @@ prime.data <- prime.data.g
 
 # MAKE a frequency table of "Metastasis_site" 
 prime.data.h <- data.frame(table(prime.data$Metastasis_site))
-
+print(prime.data.h)
 # WRITE this file as clean data and save to 2.Clean.Data
 write.csv(prime.data.h, paste(path.cd, "Freq_of_Metas_Site_All_Primary.csv"),
           row.names = FALSE)
 
 #====================== Subset by Primary Site =================================
 
-#     We want to look at each Primary tumor site indavidually and the
+#     We want to look at each Primary tumor site individually and the
 #     metastatic sites that are associated with each. We also want to add 
 #     a column with the weight of each metastatic site. We determined the 
 #     weight of sites by deviding the number of occurances at that metastatic 
@@ -207,7 +207,10 @@ for(i in 1:length(primary.site.b)){
   # write this as a clean data file 
   v <- paste (primary.site.b[i] ,"Freq_Weight_Mas_Site.csv", sep="_")
   write.csv(m, paste(path.cd,v[1]))
-   
+
+# Print the tables
+  print(m)
+  print(n)
 # rename temporary objects so the data frames can be called on later   
   assign(paste(primary.site.b[i], ".freq", sep=""), m) 
  assign(paste(primary.site.b[i], ".data", sep = ""), n)
@@ -319,6 +322,9 @@ for(i in 1:(length(primary.site.b))) {
 
 
 }
+
+# PRINT the table
+print(paired.prob.subset)  #The last 3 columns should just be NAs
 
 # WRITE as a csv, save to the 3.Analysis folder as it will be used specifically 
 # for a test.
