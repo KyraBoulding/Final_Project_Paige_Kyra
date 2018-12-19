@@ -102,15 +102,24 @@ write.csv(paired.prob.subset, paste(path.a, "Same_Site_Prob.csv"))
 
 # SUBSET the primary sites with significant p-values.
 subset.pval.prob <- paired.prob.subset%>%
-  filter(P_value < Alpha.val)
+  filter(P_value < Alpha.val)%>%
+ select(primary_site, probability, P_value, CI_lower,CI_upper,total_samples)
+#select only mentioned columns to not have a cluttered table
+
+
 
 # CREATE a table with all the primary sites with significantly different 
 # probabilities of haveing metastasis occur in the same site as the primary 
 # tumor.
 #*** ENSURE YOU CLEAR PLOTS FIRST OTHERWISE IT WILL PLOT THE TABLE OVER TOP ****
-table.c<- grid.table(subset.pval.prob[1:9, 1:7], theme = ttheme_default())
+table.c<- grid.table(subset.pval.prob[1:9, 1:6], theme = ttheme_default())
 
 # SAVE as a pdf
+#***** NOTE ******
+# this code does not work to save this table. It either saves a table with cut
+# off sides or an empty pdf. Despite many different appraoches we could not find
+# a way to save the table. As a result a screen shot version of the table has 
+# been included in the Table folder of this repo.
 pdf(paste(path.t, "Significant_Probs.pdf"))
 plot(table.c)
 dev.off()
