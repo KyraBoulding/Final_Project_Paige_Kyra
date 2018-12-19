@@ -162,7 +162,8 @@ plot(g, edge.color="gray30",edge.width=E(g)$weight, layout=coords,
      vertext.lable.dis = c(rep(4, length(coords))),
      vertex.size = 7, asp=0.3) 
 
-
+# This netwrok sometimes doesn't print when you run the entire Analyisis script 
+# at once. If this happend just run lines 156 - 163 together.
 
 
 
